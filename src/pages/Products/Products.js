@@ -18,7 +18,7 @@ const Products = () => {
   return (
     <div>
       <h1 className="text-3xl font-bold my-5">
-        Total Products: {products.length}
+        Total Products: {products?.length}
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {products.map((p) => (
@@ -29,7 +29,7 @@ const Products = () => {
           ></ProductCard>
         ))}
       </div>
-      {bookingData && <BookingModal bookingData={bookingData}></BookingModal>}
+      {bookingData && <BookingModal bookingData={bookingData} setBookingData={setBookingData}></BookingModal>}
     </div>
   );
 };

@@ -1,11 +1,41 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthProvider";
 
-const BookingModal = ({ bookingData }) => {
-    const {name} = bookingData
+const BookingModal = ({ bookingData, setBookingData }) => {
+    const {_id, name, resalePrice, categorey} = bookingData;
+    const {user} = useContext(AuthContext);
+
+    const handleBooking =(e)=>{
+        e.preventDefault();
+        const form = e.target;
+        const userName = form.userName.value;
+        const userEmail = form.userEmail.value;
+        const productName = form.productName.value;
+        const productPrice = form.productPrice.value;
+        const buyerPhoneNumber = form.buyerPhoneNumber.value;
+        const buyerMeetingLocation = form.buyerMeetingLocation.value;
+        console.log(userName, userEmail, productName, productPrice, buyerPhoneNumber, buyerMeetingLocation);
+        
+        const bookingData = {
+            productId: _id,
+            userName, 
+            userEmail, 
+            productName, 
+            productPrice, 
+            buyerPhoneNumber, 
+            buyerMeetingLocation
+        }
+        console.log(bookingData);
+        setBookingData(null)
+    }
   return (
     <section>
       {/* Put this part before </body> tag */}
-      <input type="checkbox" id="booking-modal" className="modal-toggle" />
+      <input 
+      type="checkbox" 
+      id="booking-modal" 
+      className="modal-toggle" 
+      />
       <div className="modal">
         <div className="modal-box relative">
           <label
@@ -14,41 +44,53 @@ const BookingModal = ({ bookingData }) => {
           >
             ✕
           </label>
-          <h3 className="text-lg font-bold">{name}</h3>
+          <h3 className="text-lg font-bold">You have selected <span className="text-info">{categorey}</span> categorey</h3>
 
-          <form className="py-4">
+          <form className="py-4" onSubmit={handleBooking}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            {/* user deta☻ils */}
+            {/* user details */}
             <input
               type="text"
-              placeholder="User name"
+              name="userName"
+              defaultValue={user.displayName}
+              readOnly
               className="input w-full input-bordered input-info"
             />
             <input
-              type="text"
-              placeholder="User name"
+              type="email"
+              name="userEmail"
+              defaultValue={user.email}
+              readOnly
               className="input w-full input-bordered input-info"
             />
             {/* product details */}
             <input
               type="text"
-              placeholder="Item name"
+              name="productName"
+              defaultValue={name}
+              readOnly
               className="input w-full input-bordered input-info"
             />
             <input
-              type="text"
-              placeholder="Item price"
+              type="number"
+              name="productPrice"
+              defaultValue={resalePrice}
+              readOnly
               className="input w-full input-bordered input-info"
             />
             {/* buyers phone number and address */}
             <input
-              type="text"
+              type="number"
+              name="buyerPhoneNumber"
               placeholder="Your Phone Number"
+              required
               className="input w-full input-bordered input-info"
             />
             <input
               type="text"
+              name="buyerMeetingLocation"
               placeholder="Meeting Location"
+              required
               className="input w-full input-bordered input-info"
             />
             </div>

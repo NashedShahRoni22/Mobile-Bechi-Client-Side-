@@ -22,7 +22,7 @@ const ProductCard = ({ p, setBookingData }) => {
         <img src={image} alt="Shoes" />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{name}</h2>
+        <h2 className="card-title text-info">{name}</h2>
         <p className="flex items-center gap-2">
           <IoLocationSharp className="text-xl"></IoLocationSharp>
           {location}
