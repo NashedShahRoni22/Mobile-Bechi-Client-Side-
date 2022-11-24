@@ -12,7 +12,7 @@ const WhyMobileBechi = () => {
             <FaSuperpowers className="text-5xl text-info"></FaSuperpowers>
           </div>
           <div>
-            <h2 className="card-title">People Powered</h2>
+            <h2 className="card-title my-4">People Powered</h2>
             <p>
               On Mobile Bechi, you buy and sell directly with other users. No
               middleman means you get the best price and most value.
@@ -26,7 +26,7 @@ const WhyMobileBechi = () => {
             <FaTrash className="text-5xl text-info"></FaTrash>
           </div>
           <div>
-            <h2 className="card-title">No Junk</h2>
+            <h2 className="card-title my-4">No Junk</h2>
             <p>
               Mobile Bechi does not allow broken items. Every product has
               listing requirements and an approval process.
@@ -40,7 +40,7 @@ const WhyMobileBechi = () => {
             <FaListUl className="text-5xl text-info"></FaListUl>
           </div>
           <div>
-            <h2 className="card-title">Verified Listings</h2>
+            <h2 className="card-title my-4">Verified Listings</h2>
             <p>
               Every listing on Swappa is verified by our expert staff to ensure
               our strict listings requirements are followed. Buy with
@@ -55,7 +55,7 @@ const WhyMobileBechi = () => {
             <FaMailBulk className="text-5xl text-info"></FaMailBulk>
           </div>
           <div>
-            <h2 className="card-title">Great Support</h2>
+            <h2 className="card-title my-4">Great Support</h2>
             <p>
               Our support is provided by real humans who actually care. Swappa's
               typical response time for help requests is around 20 minutes!
