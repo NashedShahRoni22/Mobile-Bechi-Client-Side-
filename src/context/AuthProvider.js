@@ -23,9 +23,10 @@ const AuthProvider = ({children}) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
     const resetPassword =(email)=>{
-        sendPasswordResetEmail(auth, email)
+        return sendPasswordResetEmail(auth, email)
     }
     const signOutUser=()=>{
+        localStorage.removeItem('mobile-bechi-token');
         return signOut(auth);
     }
     const userProfileUpdate =(userProfile)=>{

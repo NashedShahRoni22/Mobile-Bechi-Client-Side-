@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 import logo from "../images/logo.png";
+import { HiBars3CenterLeft } from "react-icons/hi2";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -25,19 +26,34 @@ const Navbar = () => {
         </Link>
         <div className="flex items-center gap-4">
           {user?.photoURL && (
-            <div className="avatar online">
-              <div className="w-12 rounded-full">
-                <img src={user.photoURL} alt="" />
+            <>
+              <div>
+                <Link to="/dashboard">Dashboard</Link>
               </div>
-            </div>
+              <div className="avatar online">
+                <div className="w-12 rounded-full">
+                  <img src={user.photoURL} alt="" />
+                </div>
+              </div>
+            </>
           )}
           {user?.uid ? (
-            <button
-              onClick={handleLogOut}
-              className="btn btn-outline btn-error rounded-full"
-            >
-              Logout
-            </button>
+            <>
+              <button
+                onClick={handleLogOut}
+                className="btn btn-outline btn-error rounded-full"
+              >
+                Logout
+              </button>
+              <div>
+                <label
+                  htmlFor="sidebar-drawer"
+                  className="lg:hidden cursor-pointer btn btn-outline btn-info btn-circle"
+                >
+                  <HiBars3CenterLeft className="text-3xl"></HiBars3CenterLeft>
+                </label>
+              </div>
+            </>
           ) : (
             <Link to="/login" className="btn btn-outline btn-info rounded-full">
               Login

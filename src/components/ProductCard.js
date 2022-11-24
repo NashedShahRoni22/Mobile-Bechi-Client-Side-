@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IoLocationSharp } from "react-icons/io5";
-const ProductCard = ({ p }) => {
+import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthProvider";
+const ProductCard = ({ p, setBookingData }) => {
+  const { user } = useContext(AuthContext);
+
   const {
     name,
     image,
@@ -29,9 +33,23 @@ const ProductCard = ({ p }) => {
         <p>Used For: {yearsOfUse}</p>
         <p>Seller: {sellerName}</p>
         <p>Phone Number: {mobileNumber}</p>
-        <div className="card-actions justify-start">
-          <button className="btn btn-primary">Book Now</button>
-        </div>
+        {user ? (
+          <div className="mt-5">
+            {/* The button to booking modal */}
+            <label 
+            onClick={()=> setBookingData(p)}
+            htmlFor="booking-modal" 
+            className="btn btn-outline btn-info">
+              Book Now
+            </label>
+          </div>
+        ) : (
+          <div className="card-actions justify-start mt-5">
+            <Link to="/login" className="btn btn-outline btn-info">
+              Please Login
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

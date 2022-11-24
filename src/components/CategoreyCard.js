@@ -8,7 +8,7 @@ const CategoreyCard = ({ c }) => {
         <img src={c.image} alt="categorey" />
       </figure>
       <div className="absolute bottom-5 left-5">
-        <Link to={`/products?${c.categorey}`} className="btn ">{c.name}</Link>
+        <Link to={`/products`} className="btn ">{c.name}</Link>
       </div>
     </div>
   );

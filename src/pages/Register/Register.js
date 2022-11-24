@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { setAuthToken } from "../../api/auth";
 import SmallSpinner from "../../components/SmallSpinner";
 import { AuthContext } from "../../context/AuthProvider";
 import LoginBanner from "../../images/loginBanner.png";
@@ -34,19 +35,21 @@ const Register = () => {
         createUser(email, password)
           .then((res) => {
             toast.success("Registration Successfull!");
+            //get token
+            setAuthToken(res.user);
 
-            const userProfile ={
-              displayName : name,
-              photoURL: imageData.data.display_url
-            }
+            const userProfile = {
+              displayName: name,
+              photoURL: imageData.data.display_url,
+            };
 
-            userProfileUpdate(userProfile )
-            .then(()=>{
-              console.log("Profile Updated!")
-            })
-            .catch(e => {
-              console.error(e)
-            })
+            userProfileUpdate(userProfile)
+              .then(() => {
+                console.log("Profile Updated!");
+              })
+              .catch((e) => {
+                console.error(e);
+              });
             navigate("/login");
           })
           .catch((e) => {
@@ -63,6 +66,8 @@ const Register = () => {
         const user = res.user;
         console.log(user);
         toast.success("Google Registration Successfull!");
+        //get token
+        setAuthToken(res.user);
         navigate(from, { replace: true });
       })
       .catch((e) => {

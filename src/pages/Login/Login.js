@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { setAuthToken } from "../../api/auth";
 import SmallSpinner from "../../components/SmallSpinner";
 import { AuthContext } from "../../context/AuthProvider";
 import LoginBanner from "../../images/loginBanner.png";
@@ -22,6 +23,8 @@ const Login = () => {
         const user = res.user;
         console.log(user);
         toast.success("Login Successfull!");
+        //get token
+        setAuthToken(res.user)
         navigate(from, { replace: true });
       })
       .catch((e) => {
@@ -36,6 +39,8 @@ const Login = () => {
         const user = res.user;
         console.log(user);
         toast.success("Google Login Successfull!");
+        //get token
+        setAuthToken(res.user)
         navigate(from, { replace: true });
       })
       .catch((e) => {
@@ -48,21 +53,21 @@ const Login = () => {
     setResetEmail(email);
   };
 
-  //todo: toast not showing
-  // const handleForgetPassword = () => {
-  //   if (!resetEmail) {
-  //     toast.error("Please enter email address!");
-  //     return;
-  //   }
-  //   resetPassword(resetEmail)
-  //     .then(() => {
-  //       toast.success("Check your inbox or spam box");
-  //     })
-  //     .catch((error) => {
-  //       toast.error(error.message);
-  //       console.log(error.message);
-  //     });
-  // };
+  // todo: toast not showing
+  const handleForgetPassword = () => {
+    if (!resetEmail) {
+      toast.error("Please enter email address!");
+      return;
+    }
+    resetPassword(resetEmail)
+      .then(() => {
+        toast.success("Check your inbox or spam box");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+        console.log(error.message);
+      });
+  };
 
   return (
     <div className="hero">
@@ -99,7 +104,7 @@ const Login = () => {
                 required
               />
               <label className="label">
-                <p className="cursor-pointer">
+                <p className="cursor-pointer hover:text-info" onClick={handleForgetPassword}>
                   Forgot password?
                 </p>
               </label>
