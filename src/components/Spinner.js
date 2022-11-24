@@ -2,11 +2,11 @@ import React from 'react';
 
 const Spinner = () => {
     return (
-        <div className='flex justify-center items-center'>
-            <p className='text-3xl font-bold'>L</p>
-            <div className='h-6 w-6 border border-dashed border-info animate-bounce rounded-full'>
+        <div className='flex justify-center items-center h-48'>
+            <p className='text-5xl font-bold'>L</p>
+            <div className='h-12 w-12 border border-dashed border-info animate-bounce rounded-full'>
             </div>
-            <p>ADING...</p>
+            <p className='text-5xl'>ADING...</p>
         </div>
     );
 };
