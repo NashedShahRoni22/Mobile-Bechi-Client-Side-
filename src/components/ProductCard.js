@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { 
   IoLocationSharp, 
   IoPricetagOutline, 
@@ -7,10 +7,7 @@ import {
   IoPhonePortraitOutline,
   IoArrowRedoOutline
  } from "react-icons/io5";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthProvider";
 const ProductCard = ({ p, setBookingData }) => {
-  const { user } = useContext(AuthContext);
 
   const {
     name,
@@ -37,7 +34,7 @@ const ProductCard = ({ p, setBookingData }) => {
         <p className="flex items-center gap-2"><IoTodayOutline className="text-xl text-info"></IoTodayOutline>Used For: {yearsOfUse}</p>
         <p className="flex items-center gap-2"><IoPersonOutline className="text-xl text-info"></IoPersonOutline>Seller: {sellerName}</p>
         <p className="flex items-center gap-2"><IoPhonePortraitOutline className="text-xl text-info"></IoPhonePortraitOutline>Phone Number: {mobileNumber}</p>
-        {user ? (
+        
           <div className="mt-5">
             {/* The button to booking modal */}
             <label 
@@ -47,13 +44,7 @@ const ProductCard = ({ p, setBookingData }) => {
               Book Now
             </label>
           </div>
-        ) : (
-          <div className="card-actions justify-start mt-5">
-            <Link to="/login" className="btn btn-outline btn-info">
-              Please Login
-            </Link>
-          </div>
-        )}
+        
       </div>
     </div>
   );

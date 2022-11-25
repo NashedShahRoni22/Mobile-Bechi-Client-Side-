@@ -3,14 +3,14 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../context/AuthProvider";
 
 const BookingModal = ({ bookingData, setBookingData }) => {
-  const { _id, name, resalePrice, categorey } = bookingData;
+  const { _id, image, name, resalePrice, categorey } = bookingData;
   const { user } = useContext(AuthContext);
 
   const handleBooking = (e) => {
     e.preventDefault();
     const form = e.target;
-    const userName = form.userName.value;
-    const userEmail = form.userEmail.value;
+    const name = form.userName.value;
+    const email = form.userEmail.value;
     const productName = form.productName.value;
     const productPrice = form.productPrice.value;
     const buyerPhoneNumber = form.buyerPhoneNumber.value;
@@ -18,8 +18,9 @@ const BookingModal = ({ bookingData, setBookingData }) => {
     
     const bookingData = {
       productId: _id,
-      userName,
-      userEmail,
+      productImage: image,
+      name,
+      email,
       productName,
       productPrice,
       buyerPhoneNumber,
