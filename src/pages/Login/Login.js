@@ -1,17 +1,25 @@
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { setAuthToken } from "../../api/auth";
 import SmallSpinner from "../../components/SmallSpinner";
 import { AuthContext } from "../../context/AuthProvider";
+import useToken from "../../hooks/useToken";
 import LoginBanner from "../../images/loginBanner.png";
 
 const Login = () => {
-  const { googleSignIn, loginUser, resetPassword, loader, setLoader } = useContext(AuthContext);
+  const { googleSignIn, loginUser, resetPassword, loader, setLoader } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const [resetEmail, setResetEmail] = useState(null);
+  //get token
+  const [loginUserEmail, setLoginUserEmail] = useState("");
+  const [token] = useToken(loginUserEmail);
+
+  if (token) {
+    navigate(from, { replace: true });
+  }
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -21,11 +29,8 @@ const Login = () => {
     loginUser(email, password)
       .then((res) => {
         const user = res.user;
-        console.log(user);
+        setLoginUserEmail(user.email);
         toast.success("Login Successfull!");
-        //get token
-        setAuthToken(res.user)
-        navigate(from, { replace: true });
       })
       .catch((e) => {
         toast.error(e.message);
@@ -39,8 +44,6 @@ const Login = () => {
         const user = res.user;
         console.log(user);
         toast.success("Google Login Successfull!");
-        //get token
-        setAuthToken(res.user)
         navigate(from, { replace: true });
       })
       .catch((e) => {
@@ -53,7 +56,6 @@ const Login = () => {
     setResetEmail(email);
   };
 
-  // todo: toast not showing
   const handleForgetPassword = () => {
     if (!resetEmail) {
       toast.error("Please enter email address!");
@@ -104,7 +106,10 @@ const Login = () => {
                 required
               />
               <label className="label">
-                <p className="cursor-pointer hover:text-info" onClick={handleForgetPassword}>
+                <p
+                  className="cursor-pointer hover:text-info"
+                  onClick={handleForgetPassword}
+                >
                   Forgot password?
                 </p>
               </label>
@@ -117,7 +122,10 @@ const Login = () => {
             <div className="divider lg:divider-horizontal">OR</div>
 
             <div className="form-control mb-6">
-              <button className="btn btn-outline btn-success" onClick={handleGoogleLogin}>
+              <button
+                className="btn btn-outline btn-success"
+                onClick={handleGoogleLogin}
+              >
                 Google Login
               </button>
             </div>

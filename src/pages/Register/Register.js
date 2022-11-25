@@ -1,17 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { setAuthToken } from "../../api/auth";
 import SmallSpinner from "../../components/SmallSpinner";
 import { AuthContext } from "../../context/AuthProvider";
+import useToken from "../../hooks/useToken";
 import LoginBanner from "../../images/loginBanner.png";
 
 const Register = () => {
   const { createUser, googleSignIn, userProfileUpdate, loader, setLoader } =
     useContext(AuthContext);
+  //navigate user
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  //get token
+  const [createdUserEmail, setCreatedUserEmail] = useState('');
+  const [token] = useToken(createdUserEmail);
+
+  if(token){ 
+    navigate("/login");
+  }
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -20,7 +28,7 @@ const Register = () => {
     const image = form.image.files[0];
     const email = form.email.value;
     const password = form.password.value;
-    // const role = form.role.value;
+    const role = form.role.value;
 
     const formData = new FormData();
     formData.append("image", image);
@@ -35,8 +43,6 @@ const Register = () => {
         createUser(email, password)
           .then((res) => {
             toast.success("Registration Successfull!");
-            //get token
-            setAuthToken(res.user);
 
             const userProfile = {
               displayName: name,
@@ -45,12 +51,12 @@ const Register = () => {
 
             userProfileUpdate(userProfile)
               .then(() => {
-                console.log("Profile Updated!");
+                console.log("Profile Updated");
+                saveUser(name, email, role);
               })
               .catch((e) => {
                 console.error(e);
               });
-            navigate("/login");
           })
           .catch((e) => {
             console.log(e.message);
@@ -60,14 +66,28 @@ const Register = () => {
       .catch((e) => console.log(e));
   };
 
+  //save user to db
+  const saveUser = (name, email, role) => {
+    const user = { name, email, role };
+    fetch("http://localhost:8000/user", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCreatedUserEmail(email);
+      });
+  };
+
   const handleGoogleLogin = () => {
     googleSignIn()
       .then((res) => {
         const user = res.user;
         console.log(user);
         toast.success("Google Registration Successfull!");
-        //get token
-        setAuthToken(res.user);
         navigate(from, { replace: true });
       })
       .catch((e) => {

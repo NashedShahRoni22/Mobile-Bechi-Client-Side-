@@ -15,7 +15,12 @@ const MyOrders = () => {
     data: myBookings,
   } = useQuery({
     queryKey: ["repoData"],
-    queryFn: () => fetch(url).then((res) => res.json()),
+    queryFn: () => fetch(url,{
+      headers:{
+        authorization: `bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+    .then((res) => res.json()),
   });
 
   if (isLoading) return <Spinner></Spinner>;
@@ -30,6 +35,7 @@ const MyOrders = () => {
         <table className="table w-full">
           <thead>
             <tr>
+              <th></th>
               <th>Image</th>
               <th>Title</th>
               <th>Price</th>
@@ -37,8 +43,8 @@ const MyOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {myBookings.map(mb => (
-              <MyOrdersRow key={mb._id} mb={mb}></MyOrdersRow>
+            {myBookings.map((mb,i) => (
+              <MyOrdersRow key={mb._id} mb={mb} i={i}></MyOrdersRow>
             ))}
           </tbody>
         </table>

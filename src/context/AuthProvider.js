@@ -26,7 +26,7 @@ const AuthProvider = ({children}) => {
         return sendPasswordResetEmail(auth, email)
     }
     const signOutUser=()=>{
-        localStorage.removeItem('mobile-bechi-token');
+        localStorage.removeItem('accessToken');
         return signOut(auth);
     }
     const userProfileUpdate =(userProfile)=>{
