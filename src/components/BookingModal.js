@@ -38,6 +38,10 @@ const BookingModal = ({ bookingData, setBookingData }) => {
           setBookingData(null);
           toast.success("Booking confirmed!");
         }
+        else{
+          toast.error(data.message);
+          form.reset();
+        }
       });
   };
   return (

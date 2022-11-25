@@ -42,7 +42,7 @@ const WhyMobileBechi = () => {
           <div>
             <h2 className="card-title my-4">Verified Listings</h2>
             <p>
-              Every listing on Swappa is verified by our expert staff to ensure
+              Every listing on Mobile Bechi is verified by our expert staff to ensure
               our strict listings requirements are followed. Buy with
               confidence.
             </p>
@@ -57,7 +57,7 @@ const WhyMobileBechi = () => {
           <div>
             <h2 className="card-title my-4">Great Support</h2>
             <p>
-              Our support is provided by real humans who actually care. Swappa's
+              Our support is provided by real humans who actually care. Mobile Bechi
               typical response time for help requests is around 20 minutes!
             </p>
           </div>
