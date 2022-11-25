@@ -16,7 +16,7 @@ const DashboardLayout = () => {
           <ul className="menu p-4 w-80 bg-base-100 text-base-content">
             {/* Only Buyers */}
             <li>
-              <Link>My Orders</Link>
+              <Link to='/dashboard'>My Orders</Link>
             </li>
             {/* Only Sellers */}
             <li>
@@ -30,10 +30,10 @@ const DashboardLayout = () => {
             </li>
             {/* Only Admin */}
             <li>
-              <Link>All Sellers</Link>
+              <Link to='/dashboard/all-sellers'>All Sellers</Link>
             </li>
             <li>
-              <Link>All Buyers</Link>
+              <Link to='/dashboard/all-buyers'>All Buyers</Link>
             </li>
           </ul>
         </div>
