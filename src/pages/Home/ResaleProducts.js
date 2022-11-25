@@ -5,12 +5,7 @@ import Spinner from '../../components/Spinner';
 
 
 const ResaleProducts = () => {
-    // const [categorey, setCategorey] = useState([]);
-    // useEffect(()=>{
-    //     fetch('')
-    //     .then(res => res.json())
-    //     .then(data => setCategorey(data))
-    // },[])
+  
     const { isLoading, data:categories } = useQuery({
         queryKey: ['products'],
         queryFn: () =>

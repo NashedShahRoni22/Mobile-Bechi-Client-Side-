@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 const ProductCard = ({ p, setBookingData }) => {
   const { user } = useContext(AuthContext);
-
+  
   const {
     name,
     image,
@@ -24,7 +24,7 @@ const ProductCard = ({ p, setBookingData }) => {
       <div className="card-body">
         <h2 className="card-title text-info">{name}</h2>
         <p className="flex items-center gap-2">
-          <IoLocationSharp className="text-xl"></IoLocationSharp>
+          <IoLocationSharp className="text-xl text-info"></IoLocationSharp>
           {location}
         </p>
         <p>Condition: {condition}</p>
