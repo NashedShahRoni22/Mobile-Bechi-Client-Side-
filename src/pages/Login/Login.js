@@ -41,13 +41,14 @@ const Login = () => {
   const handleGoogleLogin = () => {
     googleSignIn()
       .then((res) => {
-        const user = res.user;
-        console.log(user);
+        // const user = res.user;
+        // setLoginUserEmail(user.email);
         toast.success("Google Login Successfull!");
         navigate(from, { replace: true });
       })
       .catch((e) => {
         toast.error(e.message);
+        setLoader(false);
       });
   };
 
@@ -67,7 +68,6 @@ const Login = () => {
       })
       .catch((error) => {
         toast.error(error.message);
-        console.log(error.message);
       });
   };
 

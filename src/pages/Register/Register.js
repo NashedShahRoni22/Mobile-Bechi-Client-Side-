@@ -14,10 +14,10 @@ const Register = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   //get token
-  const [createdUserEmail, setCreatedUserEmail] = useState('');
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
   const [token] = useToken(createdUserEmail);
 
-  if(token){ 
+  if (token) {
     navigate("/login");
   }
 
@@ -66,6 +66,20 @@ const Register = () => {
       .catch((e) => console.log(e));
   };
 
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then((res) => {
+        const user = res.user;
+        saveUser(user.displayName, user.email, "Buyer");
+        toast.success("Google Registration Successfull!");
+        navigate(from, { replace: true });
+      })
+      .catch((e) => {
+        toast.error(e.message);
+        setLoader(false);
+      });
+  };
+
   //save user to db
   const saveUser = (name, email, role) => {
     const user = { name, email, role };
@@ -79,19 +93,6 @@ const Register = () => {
       .then((res) => res.json())
       .then((data) => {
         setCreatedUserEmail(email);
-      });
-  };
-
-  const handleGoogleLogin = () => {
-    googleSignIn()
-      .then((res) => {
-        const user = res.user;
-        console.log(user);
-        toast.success("Google Registration Successfull!");
-        navigate(from, { replace: true });
-      })
-      .catch((e) => {
-        console.error(e.message);
       });
   };
   return (

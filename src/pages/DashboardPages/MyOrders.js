@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
-import MyOrdersRow from "../../components/MyOrdersRow";
 import Spinner from "../../components/Spinner";
 import { AuthContext } from "../../context/AuthProvider";
 
@@ -13,6 +12,7 @@ const MyOrders = () => {
     isLoading,
     error,
     data: myBookings,
+    refetch
   } = useQuery({
     queryKey: ["repoData"],
     queryFn: () => fetch(url,{
@@ -26,6 +26,25 @@ const MyOrders = () => {
   if (isLoading) return <Spinner></Spinner>;
 
   if (error) return toast.error(error.message);
+
+  const handleDelete = (mb) => {
+    const agree = window.confirm(`Are you sure to delete ${mb.productName}`);
+    if (agree) {
+      fetch(`http://localhost:8000/bookings/${mb._id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            toast.error(`${mb.productName} deleted successfully!`);
+            refetch();
+          }
+        });
+    }
+  };
 
   return (
     <section>
@@ -43,8 +62,29 @@ const MyOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {myBookings.map((mb,i) => (
-              <MyOrdersRow key={mb._id} mb={mb} i={i}></MyOrdersRow>
+            {myBookings?.map((mb,i) => (
+              <tr key={mb._id}>
+              <td>{i + 1}</td>
+              <td>
+                <div className="avatar">
+                  <div className="w-12 h-12">
+                    <img src={mb.productImage} alt="ProductImage" />
+                  </div>
+                </div>
+              </td>
+              <td>{mb.productName}</td>
+              <td>{mb.productPrice}</td>
+              <td>
+                <button 
+                onClick={()=> handleDelete(mb)}
+                className="btn btn-outline btn-error btn-xs">
+                  Delete
+                </button>
+                <button className="btn btn-outline btn-success btn-xs ml-5">
+                  Pay Now
+                </button>
+              </td>
+            </tr>
             ))}
           </tbody>
         </table>

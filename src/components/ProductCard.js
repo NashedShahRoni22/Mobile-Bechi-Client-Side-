@@ -31,7 +31,7 @@ const ProductCard = ({ p, setBookingData }) => {
         <p className="flex items-center gap-2"><IoArrowRedoOutline className="text-xl text-info"></IoArrowRedoOutline>Condition: {condition} </p>
         <p className="flex items-center gap-2"><IoPricetagOutline className="text-xl text-info"></IoPricetagOutline>Resale Price: {resalePrice}</p>
         <p className="flex items-center gap-2"><IoPricetagOutline className="text-xl text-info"></IoPricetagOutline>Orginal Price: {orginalPrice}</p>
-        <p className="flex items-center gap-2"><IoTodayOutline className="text-xl text-info"></IoTodayOutline>Used For: {yearsOfUse}</p>
+        <p className="flex items-center gap-2"><IoTodayOutline className="text-xl text-info"></IoTodayOutline>Used For: {yearsOfUse} Month</p>
         <p className="flex items-center gap-2"><IoPersonOutline className="text-xl text-info"></IoPersonOutline>Seller: {sellerName}</p>
         <p className="flex items-center gap-2"><IoPhonePortraitOutline className="text-xl text-info"></IoPhonePortraitOutline>Phone Number: {mobileNumber}</p>
         
