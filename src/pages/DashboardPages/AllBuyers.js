@@ -6,7 +6,7 @@ const AllBuyers = () => {
   const {
     isLoading,
     error,
-    data: allbuyers,
+    data: allBuyers,
   } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
@@ -16,9 +16,13 @@ const AllBuyers = () => {
   if (isLoading) return <Spinner></Spinner>;
 
   if (error) return "An error has occurred: " + error.message;
+
+  const handleDelete =id=>{
+    console.log(id);
+  }
   return (
     <div>
-      <h1 className="text-xl my-5">All Buyers {allbuyers?.length}</h1>
+      <h1 className="text-xl my-5">All Buyers {allBuyers?.length}</h1>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -31,14 +35,16 @@ const AllBuyers = () => {
             </tr>
           </thead>
           <tbody>
-            {allbuyers.map((au,i) => (
-              <tr key={au._id}>
+            {allBuyers.map((ab,i) => (
+              <tr key={ab._id}>
                 <th>{i+1}</th>
-                <td>{au.name}</td>
-                <td>{au.email}</td>
-                <td>{au.role}</td>
+                <td>{ab.name}</td>
+                <td>{ab.email}</td>
+                <td>{ab.role}</td>
                 <td>
-                    <button className="btn btn-outline btn-error btn-xs">
+                    <button 
+                    onClick={()=>handleDelete(ab._id)}
+                    className="btn btn-outline btn-error btn-xs">
                         Delete
                     </button>
                 </td>
