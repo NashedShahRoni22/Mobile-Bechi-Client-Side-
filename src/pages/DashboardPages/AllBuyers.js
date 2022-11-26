@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import toast from "react-hot-toast";
 import Spinner from "../../components/Spinner";
 
 const AllBuyers = () => {
   const {
     isLoading,
     error,
+    refetch,
     data: allBuyers,
   } = useQuery({
     queryKey: ["repoData"],
@@ -17,8 +19,20 @@ const AllBuyers = () => {
 
   if (error) return "An error has occurred: " + error.message;
 
-  const handleDelete =id=>{
-    console.log(id);
+  const handleDelete =user=>{
+    const agree = window.confirm(`Are you sure to delete ${user.name}`)
+    if(agree){
+      fetch(`http://localhost:8000/buyers/${user._id}`,{
+        method:"DELETE"
+      })
+      .then(res => res.json())
+      .then(data =>{
+        if(data.deletedCount > 0){
+          toast.error(`${user.name} deleted successfully!`)
+          refetch();
+        };
+      })
+    }
   }
   return (
     <div>
@@ -43,7 +57,7 @@ const AllBuyers = () => {
                 <td>{ab.role}</td>
                 <td>
                     <button 
-                    onClick={()=>handleDelete(ab._id)}
+                    onClick={()=>handleDelete(ab)}
                     className="btn btn-outline btn-error btn-xs">
                         Delete
                     </button>
