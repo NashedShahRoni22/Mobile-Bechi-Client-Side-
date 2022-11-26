@@ -22,7 +22,7 @@ const AllBuyers = () => {
   const handleDelete = user =>{
     const agree = window.confirm(`Are you sure to delete ${user.name}`)
     if(agree){
-      fetch(`http://localhost:8000/buyers/${user._id}`,{
+      fetch(`http://localhost:8000/user/${user._id}`,{
         method:"DELETE",
         headers:{
           authorization: `bearer ${localStorage.getItem('accessToken')}`
