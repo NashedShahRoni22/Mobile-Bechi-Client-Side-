@@ -10,7 +10,7 @@ const AllBuyers = () => {
     refetch,
     data: allBuyers,
   } = useQuery({
-    queryKey: ["repoData"],
+    queryKey: ["buyers"],
     queryFn: () =>
       fetch("http://localhost:8000/buyers").then((res) => res.json()),
   });
@@ -19,11 +19,14 @@ const AllBuyers = () => {
 
   if (error) return "An error has occurred: " + error.message;
 
-  const handleDelete =user=>{
+  const handleDelete = user =>{
     const agree = window.confirm(`Are you sure to delete ${user.name}`)
     if(agree){
       fetch(`http://localhost:8000/buyers/${user._id}`,{
-        method:"DELETE"
+        method:"DELETE",
+        headers:{
+          authorization: `bearer ${localStorage.getItem('accessToken')}`
+        }
       })
       .then(res => res.json())
       .then(data =>{

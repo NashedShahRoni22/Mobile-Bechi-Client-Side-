@@ -10,7 +10,7 @@ const AllSellers = () => {
     data: allSellers,
     refetch,
   } = useQuery({
-    queryKey: ["repoData"],
+    queryKey: ["sellers"],
     queryFn: () =>
       fetch("http://localhost:8000/sellers").then((res) => res.json()),
   });
@@ -19,17 +19,36 @@ const AllSellers = () => {
 
   if (error) return "An error has occurred: " + error.message;
 
-  const handleVerify =id=> {
-    fetch(`http://localhost:8000/sellers/verify/${id}`, {
+  const handleDelete = (user) => {
+    const agree = window.confirm(`Are you sure to delete ${user.name}`);
+    if (agree) {
+      fetch(`http://localhost:8000/buyers/${user._id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            toast.error(`${user.name} deleted successfully!`);
+            refetch();
+          }
+        });
+    }
+  };
+
+  const handleVerify = (user) => {
+    fetch(`http://localhost:8000/sellers/verify/${user._id}`, {
       method: "PUT",
-      headers:{
-        authorization: `bearer ${localStorage.getItem('accessToken')}`
-      }
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
-          toast.success("Seller Verified!");
+          toast.success(`Seller ${user.name} verified!`);
           refetch();
         }
       });
@@ -56,14 +75,17 @@ const AllSellers = () => {
                 <td>{as.email}</td>
                 <td>{as.role}</td>
                 <td>
-                  <button className="btn btn-outline btn-error btn-xs">
+                  <button
+                    onClick={() => handleDelete(as)}
+                    className="btn btn-outline btn-error btn-xs"
+                  >
                     Delete
                   </button>
                   {as.isVerify ? (
                     <span className="text-success ml-5">Verified</span>
                   ) : (
                     <button
-                      onClick={() => handleVerify(as._id)}
+                      onClick={() => handleVerify(as)}
                       className="btn btn-outline btn-success btn-xs ml-5"
                     >
                       Verify

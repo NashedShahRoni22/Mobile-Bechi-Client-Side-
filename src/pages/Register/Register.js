@@ -59,7 +59,7 @@ const Register = () => {
               });
           })
           .catch((e) => {
-            console.log(e.message);
+            toast.error(e.message);
             setLoader(false);
           });
       })
