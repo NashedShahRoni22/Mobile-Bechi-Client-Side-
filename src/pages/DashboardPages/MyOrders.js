@@ -10,7 +10,6 @@ const MyOrders = () => {
   const url = `http://localhost:8000/bookings?email=${user?.email}`;
   const {
     isLoading,
-    error,
     data: myBookings,
     refetch
   } = useQuery({
@@ -24,8 +23,6 @@ const MyOrders = () => {
   });
 
   if (isLoading) return <Spinner></Spinner>;
-
-  if (error) return toast.error(error.message);
 
   const handleDelete = (mb) => {
     const agree = window.confirm(`Are you sure to delete ${mb.productName}`);

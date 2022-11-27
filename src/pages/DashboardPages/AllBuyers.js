@@ -6,7 +6,6 @@ import Spinner from "../../components/Spinner";
 const AllBuyers = () => {
   const {
     isLoading,
-    error,
     refetch,
     data: allBuyers,
   } = useQuery({
@@ -16,8 +15,6 @@ const AllBuyers = () => {
   });
 
   if (isLoading) return <Spinner></Spinner>;
-
-  if (error) return "An error has occurred: " + error.message;
 
   const handleDelete = user =>{
     const agree = window.confirm(`Are you sure to delete ${user.name}`)
