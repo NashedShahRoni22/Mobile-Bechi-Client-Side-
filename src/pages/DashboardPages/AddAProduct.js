@@ -46,6 +46,7 @@ const AddAProduct = () => {
           description,
         };
         addProduct(product);
+        form.reset();
       })
       .catch((e) => console.log(e));
 
@@ -127,7 +128,7 @@ const AddAProduct = () => {
             <input
               type="number"
               name="yearsOfUse"
-              placeholder="Year of Use"
+              placeholder="Month of Use"
               className="input input-bordered input-info w-full"
               required
             />

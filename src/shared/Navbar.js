@@ -3,7 +3,8 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 import logo from "../images/logo.png";
-import { HiBars3CenterLeft } from "react-icons/hi2";
+
+import { GoSignIn , GoSignOut, GoThreeBars } from "react-icons/go";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -41,22 +42,21 @@ const Navbar = () => {
             <>
               <button
                 onClick={handleLogOut}
-                className="btn btn-outline btn-error rounded-full"
               >
-                Logout
+                <GoSignOut className="text-2xl text-error"></GoSignOut>
               </button>
               <div>
                 <label
                   htmlFor="sidebar-drawer"
-                  className="lg:hidden cursor-pointer btn btn-outline btn-info btn-circle"
+                  className="lg:hidden cursor-pointer"
                 >
-                  <HiBars3CenterLeft className="text-3xl"></HiBars3CenterLeft>
+                  <GoThreeBars className="text-3xl text-info"></GoThreeBars>
                 </label>
               </div>
             </>
           ) : (
-            <Link to="/login" className="btn btn-outline btn-info rounded-full">
-              Login
+            <Link to="/login">
+              <GoSignIn className="text-2xl text-success"></GoSignIn>
             </Link>
           )}
         </div>

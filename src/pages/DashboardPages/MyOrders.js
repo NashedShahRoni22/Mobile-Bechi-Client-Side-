@@ -14,7 +14,7 @@ const MyOrders = () => {
     data: myBookings,
     refetch
   } = useQuery({
-    queryKey: ["repoData"],
+    queryKey: ["bookings"],
     queryFn: () => fetch(url,{
       headers:{
         authorization: `bearer ${localStorage.getItem('accessToken')}`
