@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
+import Spinner from "../../components/Spinner";
 import { AuthContext } from "../../context/AuthProvider";
 
 const MyProduct = () => {
@@ -7,7 +9,6 @@ const MyProduct = () => {
 
   const {
     isLoading,
-    error,
     data: myProducts,
   } = useQuery({
     queryKey: ["products"],
@@ -17,9 +18,23 @@ const MyProduct = () => {
       ),
   });
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return <Spinner></Spinner>;
 
-  if (error) return "An error has occurred: " + error.message;
+  const handleAdvertise =(p)=>{
+    fetch('http://localhost:8000/advertise',{
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(p),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if(data.acknowledged){
+            toast.success("Product advertise successfully!")
+        };
+      });
+  }
   return (
     <div>
       <h1 className="text-xl my-5">My Product {myProducts?.length}</h1>
@@ -51,7 +66,7 @@ const MyProduct = () => {
                   <button className="btn btn-success btn-xs">Available</button>
                 </td>
                 <td>
-                  <button className="btn btn-info btn-xs">Advertise</button>
+                  <button onClick={()=>handleAdvertise(mp)} className="btn btn-info btn-xs">Advertise</button>
                   <button className="btn btn-error ml-5 btn-xs">Delete</button>
                 </td>
               </tr>
