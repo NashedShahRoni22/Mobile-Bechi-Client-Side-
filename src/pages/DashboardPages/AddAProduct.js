@@ -44,6 +44,8 @@ const AddAProduct = () => {
           sellerEmail:user.email,
           mobileNumber,
           description,
+          isAdtertise:false,
+          isSellerVerified:false,
         };
         addProduct(product);
         form.reset();

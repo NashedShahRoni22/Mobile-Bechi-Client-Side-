@@ -10,6 +10,7 @@ const MyProduct = () => {
   const {
     isLoading,
     data: myProducts,
+    refetch,
   } = useQuery({
     queryKey: ["products"],
     queryFn: () =>
@@ -20,21 +21,38 @@ const MyProduct = () => {
 
   if (isLoading) return <Spinner></Spinner>;
 
-  const handleAdvertise =(p)=>{
-    fetch('http://localhost:8000/advertise',{
-      method: "POST",
+  const handleAdvertise = (p) => {
+    fetch(`http://localhost:8000/products/${p._id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(p),
     })
       .then((res) => res.json())
       .then((data) => {
-        if(data.acknowledged){
-            toast.success("Product advertise successfully!")
-        };
+        if (data.modifiedCount > 0) {
+          toast.success(`${p.name} advertise successfully!`);
+          refetch();
+        }
       });
-  }
+  };
+
+  const handleDelete = (p) => {
+    const sure = window.confirm(`Do want to delete ${p.name}?`);
+    if (sure) {
+      fetch(`http://localhost:8000/products/${p._id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          toast.error(`${p.name} deleted successfully!`);
+          refetch();
+        });
+    }
+  };
   return (
     <div>
       <h1 className="text-xl my-5">My Product {myProducts?.length}</h1>
@@ -50,14 +68,11 @@ const MyProduct = () => {
             </tr>
           </thead>
           <tbody>
-            {myProducts?.map((mp) => 
-              <tr>
+            {myProducts?.map((mp) => (
+              <tr key={mp._id}>
                 <td>
                   <div className="mask w-12 h-12">
-                    <img
-                      src={mp.image}
-                      alt="ProductImage"
-                    />
+                    <img src={mp.image} alt="ProductImage" />
                   </div>
                 </td>
                 <td>{mp.name}</td>
@@ -66,11 +81,26 @@ const MyProduct = () => {
                   <button className="btn btn-success btn-xs">Available</button>
                 </td>
                 <td>
-                  <button onClick={()=>handleAdvertise(mp)} className="btn btn-info btn-xs">Advertise</button>
-                  <button className="btn btn-error ml-5 btn-xs">Delete</button>
+                  {mp.isAdtertise ? (
+                    <button>Advertised</button>
+                  ) : (
+                    <button
+                      onClick={() => handleAdvertise(mp)}
+                      className="btn btn-info btn-xs"
+                    >
+                      Advertise
+                    </button>
+                  )}
+
+                  <button
+                    onClick={() => handleDelete(mp)}
+                    className="btn btn-error ml-5 btn-xs"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
       </div>

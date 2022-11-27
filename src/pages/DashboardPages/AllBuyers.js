@@ -17,7 +17,7 @@ const AllBuyers = () => {
   if (isLoading) return <Spinner></Spinner>;
 
   const handleDelete = user =>{
-    const agree = window.confirm(`Are you sure to delete ${user.name}`)
+    const agree = window.confirm(`Are you sure to delete ${user.name}?`)
     if(agree){
       fetch(`http://localhost:8000/user/${user._id}`,{
         method:"DELETE",
