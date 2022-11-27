@@ -25,30 +25,42 @@ const ProductCard = ({ p, setBookingData }) => {
     mobileNumber,
   } = p;
 
-  const handleReportItem =(p)=>{
-    const agree = window.confirm(`Do you want to report this product named ${p.name}`)
-    if(agree){
+  const handleReportItem = (p) => {
+    const agree = window.confirm(
+      `Do you want to report this product named ${p.name}`
+    );
+    if (agree) {
       fetch(`http://localhost:8000/reportedProducts/${p._id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.matchedCount > 0) {
-          toast.success(`${p.name} reported successfully!`);
-        }
-      });
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.matchedCount > 0) {
+            toast.success(`${p.name} reported successfully!`);
+          }
+        });
     }
-  }
+  };
   return (
-    <div className="card shadow-xl">
+    <div className="card shadow-xl border border-info">
       <figure>
-        <img src={image} alt="Shoes" />
+        <img src={image} alt="ProductCardImage" />
       </figure>
       <div className="card-body">
-        <h2 className="card-title text-info">{name}</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="card-title text-info">{name}</h2>
+          <div>
+            <button
+              onClick={() => handleReportItem(p)}
+              className="btn btn-outline btn-error btn-xs"
+            >
+              Report to admin
+            </button>
+          </div>
+        </div>
         <p className="flex items-center gap-2">
           <IoLocationSharp className="text-xl text-info"></IoLocationSharp>
           {location}{" "}
@@ -78,28 +90,21 @@ const ProductCard = ({ p, setBookingData }) => {
           Phone Number: {mobileNumber}
         </p>
 
-        <div className="mt-5 flex gap-2">
-          <div>
-            {/* The button to booking modal */}
-            {user?.email ? (
-              <label
-                onClick={() => setBookingData(p)}
-                htmlFor="booking-modal"
-                className="btn btn-outline btn-info"
-              >
-                Book Now
-              </label>
-            ) : (
-              <Link to="/login" className="btn btn-outline btn-info">
-                Login Now
-              </Link>
-            )}
-          </div>
-          <div>
-            <button 
-            onClick={()=>handleReportItem(p)}
-            className="btn btn-outline btn-error">Report to admin</button>
-          </div>
+        <div className="mt-5">
+          {/* The button to booking modal */}
+          {user?.email ? (
+            <label
+              onClick={() => setBookingData(p)}
+              htmlFor="booking-modal"
+              className="btn btn-outline btn-info"
+            >
+              Book Now
+            </label>
+          ) : (
+            <Link to="/login" className="btn btn-outline btn-info">
+              Login Now
+            </Link>
+          )}
         </div>
       </div>
     </div>

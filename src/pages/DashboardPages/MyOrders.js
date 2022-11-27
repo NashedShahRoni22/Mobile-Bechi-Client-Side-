@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import Spinner from "../../components/Spinner";
 import { AuthContext } from "../../context/AuthProvider";
 
@@ -11,15 +12,15 @@ const MyOrders = () => {
   const {
     isLoading,
     data: myBookings,
-    refetch
+    refetch,
   } = useQuery({
     queryKey: ["bookings"],
-    queryFn: () => fetch(url,{
-      headers:{
-        authorization: `bearer ${localStorage.getItem('accessToken')}`
-      }
-    })
-    .then((res) => res.json()),
+    queryFn: () =>
+      fetch(url, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) => res.json()),
   });
 
   if (isLoading) return <Spinner></Spinner>;
@@ -59,29 +60,38 @@ const MyOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {myBookings?.map((mb,i) => (
+            {myBookings?.map((mb, i) => (
               <tr key={mb._id}>
-              <td>{i + 1}</td>
-              <td>
-                <div className="avatar">
-                  <div className="w-12 h-12">
-                    <img src={mb.productImage} alt="ProductImage" />
+                <td>{i + 1}</td>
+                <td>
+                  <div className="avatar">
+                    <div className="w-12 h-12">
+                      <img src={mb.productImage} alt="ProductImage" />
+                    </div>
                   </div>
-                </div>
-              </td>
-              <td>{mb.productName}</td>
-              <td>{mb.productPrice}</td>
-              <td>
-                <button 
-                onClick={()=> handleDelete(mb)}
-                className="btn btn-outline btn-error btn-xs">
-                  Delete
-                </button>
-                <button className="btn btn-outline btn-success btn-xs ml-5">
-                  Pay Now
-                </button>
-              </td>
-            </tr>
+                </td>
+                <td>{mb.productName}</td>
+                <td>{mb.productPrice} BDT</td>
+                <td>
+                  <button
+                    onClick={() => handleDelete(mb)}
+                    className="btn btn-outline btn-error btn-sm"
+                  >
+                    Delete
+                  </button>
+                  {mb.productPrice && !mb.paid && (
+                    <Link
+                      to={`/dashboard/payment/${mb._id}`}
+                     className="btn btn-outline btn-success btn-sm ml-5">
+                      Pay Now
+                    </Link>
+                  )}
+                  {
+                    mb.productPrice && mb.paid &&
+                    <span className="text-success ml-5">Paid</span>
+                  }
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>

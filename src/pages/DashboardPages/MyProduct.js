@@ -48,8 +48,10 @@ const MyProduct = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          toast.error(`${p.name} deleted successfully!`);
-          refetch();
+          if (data.deletedCount > 0) {
+            toast.error(`${p.name} deleted successfully!`);
+            refetch();
+          }
         });
     }
   };
@@ -81,8 +83,8 @@ const MyProduct = () => {
                   <button className="btn btn-success btn-xs">Available</button>
                 </td>
                 <td>
-                  {mp.isAdtertise ? (
-                    <button>Advertised</button>
+                  {mp.isAdvertise ? (
+                    <span>Advertised</span>
                   ) : (
                     <button
                       onClick={() => handleAdvertise(mp)}

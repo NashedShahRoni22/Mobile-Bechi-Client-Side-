@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import SmallSpinner from "../../components/SmallSpinner";
 import { AuthContext } from "../../context/AuthProvider";
 import useToken from "../../hooks/useToken";
-import LoginBanner from "../../images/loginBanner.png";
+import LoginBanner from "../../images/loginImage.png";
 
 const Login = () => {
   const { googleSignIn, loginUser, resetPassword, loader, setLoader } =
