@@ -20,7 +20,7 @@ const AdvertiseProducts = () => {
     <div>
       {advertiseProducts && (
         <h1 className="text-xl my-5">
-          Advertise Product: {advertiseProducts?.length}
+          Advertise Products: {advertiseProducts?.length}
         </h1>
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

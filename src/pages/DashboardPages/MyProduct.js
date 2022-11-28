@@ -57,7 +57,7 @@ const MyProduct = () => {
   };
   return (
     <div>
-      <h1 className="text-xl my-5">My Product {myProducts?.length}</h1>
+      <h1 className="text-xl my-5">My Products: {myProducts?.length}</h1>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
           <thead>
