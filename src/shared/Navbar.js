@@ -25,7 +25,9 @@ const Navbar = () => {
             <p className="text-xl font-bold text-info">Mobile Bechi</p>
           </div>
         </Link>
+
         <div className="flex items-center gap-4">
+          <Link to='/blog'>Blog</Link>
           {user?.photoURL && (
             <>
               <div>

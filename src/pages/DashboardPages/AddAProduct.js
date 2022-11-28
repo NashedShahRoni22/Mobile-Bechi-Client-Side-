@@ -5,6 +5,8 @@ import { AuthContext } from "../../context/AuthProvider";
 
 const AddAProduct = () => {
   const { user } = useContext(AuthContext);
+  const time = new Date().toLocaleTimeString();
+
   const handleAddProduct = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -40,19 +42,19 @@ const AddAProduct = () => {
           categorey,
           categorey_id,
           condition,
-          sellerName:user.displayName,
-          sellerEmail:user.email,
+          sellerName: user.displayName,
+          sellerEmail: user.email,
           mobileNumber,
           description,
-          isAdvertise:false,
-          isSellerVerified:false,
-          isReported:false,
+          isAdvertise: false,
+          isSellerVerified: false,
+          isReported: false,
+          postTime:time,
         };
         addProduct(product);
         form.reset();
       })
       .catch((e) => console.log(e));
-
   };
   //save user to db
   const addProduct = (product) => {
@@ -65,9 +67,9 @@ const AddAProduct = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if(data.acknowledged){
-            toast.success("Product added successfully!")
-        };
+        if (data.acknowledged) {
+          toast.success("Product added successfully!");
+        }
       });
   };
   return (

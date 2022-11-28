@@ -7,6 +7,7 @@ import {
   IoPersonOutline,
   IoPhonePortraitOutline,
   IoArrowRedoOutline,
+  IoTimeOutline
 } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
@@ -23,6 +24,7 @@ const ProductCard = ({ p, setBookingData }) => {
     yearsOfUse,
     sellerName,
     mobileNumber,
+    postTime
   } = p;
 
   const handleReportItem = (p) => {
@@ -88,6 +90,11 @@ const ProductCard = ({ p, setBookingData }) => {
         <p className="flex items-center gap-2">
           <IoPhonePortraitOutline className="text-xl text-info"></IoPhonePortraitOutline>
           Phone Number: {mobileNumber}
+        </p>
+
+        <p className="flex items-center gap-2">
+          <IoTimeOutline className="text-xl text-info"></IoTimeOutline>
+          Post Time: {postTime}
         </p>
 
         <div className="mt-5">
