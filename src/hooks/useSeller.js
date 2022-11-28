@@ -5,7 +5,7 @@ const useSeller = email =>{
     const [sellerLoader, setSellerLoader] = useState(true);
     useEffect(()=>{
         if(email){
-            fetch(`http://localhost:8000/user/seller/${email}`)
+            fetch(`https://server-xi-fawn.vercel.app/user/seller/${email}`)
             .then(res => res.json())
             .then(data => {
                 setIsSeller(data.isSeller)

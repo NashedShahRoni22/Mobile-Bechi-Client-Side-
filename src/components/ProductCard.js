@@ -32,7 +32,7 @@ const ProductCard = ({ p, setBookingData }) => {
       `Do you want to report this product named ${p.name}`
     );
     if (agree) {
-      fetch(`http://localhost:8000/reportedProducts/${p._id}`, {
+      fetch(`https://server-xi-fawn.vercel.app/reportedProducts/${p._id}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",

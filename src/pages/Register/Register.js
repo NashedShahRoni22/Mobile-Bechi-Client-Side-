@@ -83,7 +83,7 @@ const Register = () => {
   //save user to db
   const saveUser = (name, email, role) => {
     const user = { name, email, role };
-    fetch("http://localhost:8000/user", {
+    fetch("https://server-xi-fawn.vercel.app/user", {
       method: "POST",
       headers: {
         "content-type": "application/json",

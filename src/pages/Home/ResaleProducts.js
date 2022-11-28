@@ -9,7 +9,7 @@ const ResaleProducts = () => {
     const { isLoading, data:categories } = useQuery({
         queryKey: ['products'],
         queryFn: () =>
-          fetch('http://localhost:8000/categorey').then(res =>
+          fetch('https://server-xi-fawn.vercel.app/categorey').then(res =>
             res.json()
           )
       })

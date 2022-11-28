@@ -9,7 +9,7 @@ const AdvertiseProducts = () => {
   const { isLoading, data: advertiseProducts } = useQuery({
     queryKey: ["advertise"],
     queryFn: () =>
-      fetch("http://localhost:8000/products").then((res) => res.json()),
+      fetch("https://server-xi-fawn.vercel.app/products").then((res) => res.json()),
   });
 
   if (isLoading) return <Spinner></Spinner>;

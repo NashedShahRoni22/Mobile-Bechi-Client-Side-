@@ -58,7 +58,7 @@ const AddAProduct = () => {
   };
   //save user to db
   const addProduct = (product) => {
-    fetch("http://localhost:8000/products", {
+    fetch("https://server-xi-fawn.vercel.app/products", {
       method: "POST",
       headers: {
         "content-type": "application/json",

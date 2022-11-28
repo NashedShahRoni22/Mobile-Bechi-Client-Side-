@@ -26,7 +26,7 @@ const BookingModal = ({ bookingData, setBookingData }) => {
       buyerPhoneNumber,
       buyerMeetingLocation,
     };
-    fetch("http://localhost:8000/bookings", {
+    fetch("https://server-xi-fawn.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -10,11 +10,10 @@ const CheckoutForm = ({ booking }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
-  const { _id, productPrice: price, name, email } = booking;
+  const { _id, productPrice: price, name, email, productId } = booking;
 
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    fetch("http://localhost:8000/create-payment-intent", {
+    fetch("https://server-xi-fawn.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,8 +69,9 @@ const CheckoutForm = ({ booking }) => {
         transectionId: paymentIntent.id,
         email,
         bookingId: _id,
+        productId: productId
       };
-      fetch("http://localhost:8000/payments", {
+      fetch("https://server-xi-fawn.vercel.app/payments", {
         method: "POST",
         headers: {
           "content-type": "application/json",

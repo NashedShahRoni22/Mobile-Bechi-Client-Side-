@@ -11,7 +11,7 @@ const AllBuyers = () => {
   } = useQuery({
     queryKey: ["buyers"],
     queryFn: () =>
-      fetch("http://localhost:8000/buyers").then((res) => res.json()),
+      fetch("https://server-xi-fawn.vercel.app/buyers").then((res) => res.json()),
   });
 
   if (isLoading) return <Spinner></Spinner>;
@@ -19,7 +19,7 @@ const AllBuyers = () => {
   const handleDelete = user =>{
     const agree = window.confirm(`Are you sure to delete ${user.name}?`)
     if(agree){
-      fetch(`http://localhost:8000/user/${user._id}`,{
+      fetch(`https://server-xi-fawn.vercel.app/user/${user._id}`,{
         method:"DELETE",
         headers:{
           authorization: `bearer ${localStorage.getItem('accessToken')}`

@@ -8,7 +8,7 @@ import { AuthContext } from "../../context/AuthProvider";
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:8000/bookings?email=${user?.email}`;
+  const url = `https://server-xi-fawn.vercel.app/bookings?email=${user?.email}`;
   const {
     isLoading,
     data: myBookings,
@@ -28,7 +28,7 @@ const MyOrders = () => {
   const handleDelete = (mb) => {
     const agree = window.confirm(`Are you sure to delete ${mb.productName}`);
     if (agree) {
-      fetch(`http://localhost:8000/bookings/${mb._id}`, {
+      fetch(`https://server-xi-fawn.vercel.app/bookings/${mb._id}`, {
         method: "DELETE",
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,

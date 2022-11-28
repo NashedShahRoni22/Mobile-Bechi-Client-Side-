@@ -7,14 +7,14 @@ const ReportedItem = () => {
   const { isLoading, data: reportedItems, refetch } = useQuery({
     queryKey: ["reportedProducts"],
     queryFn: () =>
-      fetch("http://localhost:8000/reportedProducts").then((res) => res.json()),
+      fetch("https://server-xi-fawn.vercel.app/reportedProducts").then((res) => res.json()),
   });
 
   if (isLoading) return <Spinner></Spinner>;
   const handleDelete = (ri) => {
     const agree = window.confirm(`Are you sure to delete ${ri.name}`);
     if (agree) {
-      fetch(`http://localhost:8000/products/${ri._id}`, {
+      fetch(`https://server-xi-fawn.vercel.app/products/${ri._id}`, {
         method: "DELETE",
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,

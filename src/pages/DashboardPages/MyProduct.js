@@ -14,7 +14,7 @@ const MyProduct = () => {
   } = useQuery({
     queryKey: ["products"],
     queryFn: () =>
-      fetch(`http://localhost:8000/products/${user?.email}`).then((res) =>
+      fetch(`https://server-xi-fawn.vercel.app/products/${user?.email}`).then((res) =>
         res.json()
       ),
   });
@@ -22,7 +22,7 @@ const MyProduct = () => {
   if (isLoading) return <Spinner></Spinner>;
 
   const handleAdvertise = (p) => {
-    fetch(`http://localhost:8000/products/${p._id}`, {
+    fetch(`https://server-xi-fawn.vercel.app/products/${p._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -40,7 +40,7 @@ const MyProduct = () => {
   const handleDelete = (p) => {
     const sure = window.confirm(`Do want to delete ${p.name}?`);
     if (sure) {
-      fetch(`http://localhost:8000/products/${p._id}`, {
+      fetch(`https://server-xi-fawn.vercel.app/products/${p._id}`, {
         method: "DELETE",
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,

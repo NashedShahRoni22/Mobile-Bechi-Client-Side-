@@ -35,7 +35,8 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:8000/categorey/${params.id}`),
+          fetch(`https://server-xi-fawn.vercel.app/categorey/${params.id}`),
+          
       },
       {
         path: "/login",
@@ -107,7 +108,7 @@ export const router = createBrowserRouter([
         path: "/dashboard/payment/:id",
         element: <Payments></Payments>,
         loader: ({ params }) =>
-          fetch(`http://localhost:8000/bookings/${params.id}`),
+          fetch(`https://server-xi-fawn.vercel.app/bookings/${params.id}`),
       },
     ],
   },
