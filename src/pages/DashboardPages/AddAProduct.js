@@ -53,6 +53,7 @@ const AddAProduct = () => {
           isAdvertise: false,
           isSellerVerified: false,
           isReported: false,
+          paid:false,
           postTime: time,
         };
         addProduct(product);

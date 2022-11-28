@@ -69,14 +69,14 @@ const BookingModal = ({ bookingData, setBookingData }) => {
                 type="text"
                 name="userName"
                 defaultValue={user.displayName}
-                readOnly
+                disabled
                 className="input w-full input-bordered input-info"
               />
               <input
                 type="email"
                 name="userEmail"
                 defaultValue={user.email}
-                readOnly
+                disabled
                 className="input w-full input-bordered input-info"
               />
               {/* product details */}
@@ -84,14 +84,14 @@ const BookingModal = ({ bookingData, setBookingData }) => {
                 type="text"
                 name="productName"
                 defaultValue={name}
-                readOnly
+                disabled
                 className="input w-full input-bordered input-info"
               />
               <input
                 type="number"
                 name="productPrice"
                 defaultValue={resalePrice}
-                readOnly
+                disabled
                 className="input w-full input-bordered input-info"
               />
               {/* buyers phone number and address */}
