@@ -17,7 +17,7 @@ const Navbar = () => {
       .catch((e) => console.error(e));
   };
   return (
-    <section className="py-3">
+    <section className="py-3 bg-black text-white">
       <div className="flex items-center justify-between container mx-auto">
         <Link to="/">
           <div className="flex items-center">

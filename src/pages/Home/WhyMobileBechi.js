@@ -6,7 +6,7 @@ const WhyMobileBechi = () => {
     <section className="py-10">
     <h1 className="text-3xl  font-semibold mb-5 text-center">Why you will choose Mobile Bechi?</h1>
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div className="card bg-black shadow-xl">
+      <div className="card border border-info shadow-xl">
         <div className="card-body">
           <div>
             <FaSuperpowers className="text-5xl text-info"></FaSuperpowers>
@@ -20,7 +20,7 @@ const WhyMobileBechi = () => {
           </div>
         </div>
       </div>
-      <div className="card bg-black shadow-xl">
+      <div className="card border border-info shadow-xl">
         <div className="card-body">
           <div>
             <FaTrash className="text-5xl text-info"></FaTrash>
@@ -34,7 +34,7 @@ const WhyMobileBechi = () => {
           </div>
         </div>
       </div>
-      <div className="card bg-black shadow-xl">
+      <div className="card border border-info shadow-xl">
         <div className="card-body">
           <div>
             <FaListUl className="text-5xl text-info"></FaListUl>
@@ -49,7 +49,7 @@ const WhyMobileBechi = () => {
           </div>
         </div>
       </div>
-      <div className="card bg-black shadow-xl">
+      <div className="card border border-info shadow-xl">
         <div className="card-body">
           <div>
             <FaMailBulk className="text-5xl text-info"></FaMailBulk>

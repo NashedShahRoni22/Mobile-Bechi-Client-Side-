@@ -80,7 +80,7 @@ const MyProduct = () => {
                 <td>{mp.name}</td>
                 <td>{mp.resalePrice} BDT</td>
                 <td>
-                  <button className="btn btn-success btn-xs">Available</button>
+                  <p className="text-success">Available</p>
                 </td>
                 <td>
                   {mp.isAdvertise ? (

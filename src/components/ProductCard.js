@@ -49,7 +49,7 @@ const ProductCard = ({ p, setBookingData }) => {
   return (
     <div className="card shadow-xl border border-info">
       <figure>
-        <img src={image} alt="ProductCardImage" />
+        <img src={image} alt="ProductCardImage" className="w-1/2"/>
       </figure>
       <div className="card-body">
         <div className="flex items-center justify-between">
@@ -59,7 +59,7 @@ const ProductCard = ({ p, setBookingData }) => {
               onClick={() => handleReportItem(p)}
               className="btn btn-outline btn-error btn-xs"
             >
-              Report to admin
+              Report
             </button>
           </div>
         </div>

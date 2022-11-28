@@ -6,7 +6,7 @@ import WhyMobileBechi from './WhyMobileBechi';
 
 const Home = () => {
     return (
-        <section>
+        <section className='mx-5'>
             <HomeSlider></HomeSlider>
             <ResaleProducts></ResaleProducts>
             <AdvertiseProducts></AdvertiseProducts>
