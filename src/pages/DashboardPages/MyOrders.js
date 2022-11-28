@@ -47,7 +47,7 @@ const MyOrders = () => {
   return (
     <section>
       <h1 className="text-xl my-5">My Orders {myBookings?.length}</h1>
-
+      
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>

@@ -1,11 +1,15 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { BsInfoCircle } from "react-icons/bs";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 const AddAProduct = () => {
   const { user } = useContext(AuthContext);
   const time = new Date().toLocaleTimeString();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/dashboard/my-product";
 
   const handleAddProduct = (e) => {
     e.preventDefault();
@@ -49,7 +53,7 @@ const AddAProduct = () => {
           isAdvertise: false,
           isSellerVerified: false,
           isReported: false,
-          postTime:time,
+          postTime: time,
         };
         addProduct(product);
         form.reset();
@@ -69,6 +73,7 @@ const AddAProduct = () => {
       .then((data) => {
         if (data.acknowledged) {
           toast.success("Product added successfully!");
+          navigate(from, { replace: true });
         }
       });
   };
@@ -95,6 +100,7 @@ const AddAProduct = () => {
               name="image"
               placeholder="Product Image"
               accept="image/*"
+              className="file-input file-input-bordered file-input-info w-full"
               required
             />
           </div>
@@ -157,7 +163,7 @@ const AddAProduct = () => {
                 className="tooltip"
                 data-tip="Feature(1)-Apple(2)-Android(3)"
               >
-                <BsInfoCircle className="text-3xl"></BsInfoCircle>
+                <BsInfoCircle className="text-3xl text-error"></BsInfoCircle>
               </div>
               <div className="flex-1">
                 <select
