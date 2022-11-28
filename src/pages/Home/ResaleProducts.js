@@ -1,22 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import CategoreyCard from '../../components/CategoreyCard';
-import Spinner from '../../components/Spinner';
+import axios from 'axios';
 
 
 const ResaleProducts = () => {
-  
-    const { isLoading, data:categories } = useQuery({
-        queryKey: ['products'],
-        queryFn: () =>
-          fetch('https://server-xi-fawn.vercel.app/categorey').then(res =>
-            res.json()
-          )
-      })
+  const [categories, setCategories] = useState([]);
+    axios.get('https://server-xi-fawn.vercel.app/categorey')
+    .then(data => {
+      setCategories(data.data);
+    })
 
-      if(isLoading){
-        return <Spinner></Spinner>
-      }
     return (
         <div className='py-10'>
             <h1 className='text-xl text-center font-semibold'>Buy Products By Categorey:</h1>
