@@ -1,9 +1,9 @@
 ============
 Live Website: https://mobile-bechi.web.app
 ============
-Server Side:https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-NashedShahRoni22
+Server Side:https://github.com/NashedShahRoni22/Mobile-Bechi-Server-Side-
 ============
-Client Side:https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-NashedShahRoni22
+Client Side:https://github.com/NashedShahRoni22/Mobile-Bechi-Client-Side-
 ============
 admin email: admin@admin.com
 admin password: 123456
